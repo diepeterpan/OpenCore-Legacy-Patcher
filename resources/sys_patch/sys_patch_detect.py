@@ -573,6 +573,13 @@ class DetectRootPatch:
                 self.modern_wifi = True
                 self.amfi_shim_bins = True
 
+        if (
+            isinstance(self.constants.computer.wifi, device_probe.IntelWireless)
+            and self.constants.computer.wifi.chipset in [device_probe.IntelWireless.Chipsets.IntelWirelessNIC]):
+            if self.constants.detected_os > os_data.os_data.ventura:
+                self.modern_wifi = True
+                self.amfi_shim_bins = True
+
         # if self.model in ["MacBookPro5,1", "MacBookPro5,2", "MacBookPro5,3", "MacBookPro8,2", "MacBookPro8,3"]:
         if self.model in ["MacBookPro8,2", "MacBookPro8,3"]:
             # Sierra uses a legacy GMUX control method needed for dGPU switching on MacBookPro5,x
